@@ -21,7 +21,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nikymn/frontend-dumbmerch:latest
+        tags: nikymn/frontend-dumbmerch-2:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: 
         script: |
-          docker pull nikymn/frontend-dumbmerch:latest
+          docker pull nikymn/frontend-dumbmerch-2:latest
           docker stop frontend-dumbmerch
           docker rm frontend-dumbmerch
-          docker run -d --name frontend-dumbmerch -p 3000:3000 nikymn/frontend-dumbmerch:latest
+          docker run -d --name frontend-dumbmerch -p 3000:3000 nikymn/frontend-dumbmerch-2:latest
