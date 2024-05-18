@@ -21,7 +21,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nikymn/frontend-dumbmerch-2:latest
+        tags: nikymn/frontend-dumbmerch:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -31,12 +31,12 @@ jobs:
     - name: ssh to deploy server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
+        host: 19.168.20.21
+        username: deploy
         password: ${{ secrets.PASSWORD }}
         port: 
         script: |
-          docker pull nikymn/frontend-dumbmerch-2:latest
+          docker pull nikymn/frontend-dumbmerch:latest
           docker stop frontend-dumbmerch
           docker rm frontend-dumbmerch
-          docker run -d --name frontend-dumbmerch -p 3000:3000 nikymn/frontend-dumbmerch-2:latest
+          docker run -d --name frontend-dumbmerch -p 3000:3000 nikymn/frontend-dumbmerch:latest
