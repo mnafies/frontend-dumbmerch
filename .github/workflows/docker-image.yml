@@ -21,7 +21,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nikymn/frontend-dumbmerch:latest
+        tags: nikymn/frontend-dumbmerch:2.2
 
   deploy:
     runs-on: ubuntu-latest
