@@ -1,12 +1,11 @@
 FROM node:16 as builder
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm install
-RUN npm build
+COPY . .
+RUN npm run build
 
-FROM scratch
-WORKDIR /app
-COPY --from=builder /app/src/build .
-
+FROM nginx:latest
+COPY --from=builder /app/src/build /usr/share/nginx/html
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]
