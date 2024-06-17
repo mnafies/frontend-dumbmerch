@@ -5,8 +5,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM node:16
-WORKDIR /app
-COPY --from=builder /app/build /app
+FROM nginx:latest
+COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
